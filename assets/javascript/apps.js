@@ -39,6 +39,10 @@ var numCorrect = 0;
 var numIncorrect = 0;
 // Unaswered questions
 var numUnanswered = 0;
+// Set time given to answer questions
+var counter = 10;
+
+var timerId;
 
 // Functions: 
 // score keeping
@@ -98,13 +102,16 @@ $( document ).ready(function() {
 		}
 	}
 
-	$("#questions").html()
 	// Click events:
 	// Start button reveals trivia questions and starts timer countdown
-	$( "#clickStart" ).click(function() {
-		console.log("you clicked start")
-	  $( ".start" ).hide();
-	  });
+	timerId = setInterval(function(){
+		console.log(counter);
+		counter--
+		$("#time").html("Time left: " + counter + " seconds")
+		if (counter === 0) {
+			clearInterval(timerId);
+		}
+	}, 1000);
 		// while there is still time
 			// take user's answer and store in Variables
 			// only allow user to choose one answer per question
