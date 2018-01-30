@@ -106,6 +106,8 @@ $( document ).ready(function() {
 
 	// if user hits done button
 	$("#end").click(function() {
+		// stop time running
+		clearInterval(timerId);
 		// run score keeping
 		scoreKeeping();
 		// run end of game
