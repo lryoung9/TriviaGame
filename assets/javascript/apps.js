@@ -17,7 +17,7 @@ var numIncorrect = 0;
 // Unaswered questions
 var numUnanswered = 0;
 // Set time given to answer questions
-var counter = 10;
+var counter = 90;
 
 var timerId;
 
