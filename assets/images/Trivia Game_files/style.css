@@ -1,0 +1,30 @@
+body {
+	background-image: url("../images/Beer-Lineup.jpg");
+	background-position: center bottom;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.header {
+	font-family: 'Handlee', cursive;
+	font-size: 48px;
+    text-align: center;
+    vertical-align: middle;
+}
+.btn {
+	vertical-align: middle;
+}
+#end {
+	font-family: 'Handlee', cursive;	
+}
+.questions {
+	font-size: 21px;
+}
+.radio-inline {
+	font-size: 16px;
+	margin-bottom: 36px;
+}
+
+h2 {
+	text-align: center;
+}

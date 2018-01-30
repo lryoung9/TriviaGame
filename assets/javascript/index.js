@@ -1,4 +1,5 @@
 // Variables:
+// ----------
 // array of beer-related quotes
 var quotes = [
 	{quote: '"He was a wise man who invented beer."', author: 'Plato'},
@@ -18,29 +19,21 @@ var quotes = [
 var slideNum = 1;
 
 // On page load:
+// -------------
 $( document ).ready(function() {
 	$("#randQuote").html(quotes[0].quote);
 	$("#quoteAttr").html(quotes[0].author);
 	// Loop through displaying quotes
 	setInterval(function(){
 		console.log(slideNum);
+		// display next quote
 		$("#randQuote").html(quotes[slideNum].quote);
 		$("#quoteAttr").html(quotes[slideNum].author);
 		slideNum++;
 		// when runs through all quotes
 		if (slideNum === quotes.length) {
-			// stop timer
+			// go back to first quote in array
 			slideNum =  0;
 			}
-		}, 1000*5);		
-
-	// // display a random quote
-	// var randomInt= Math.floor(Math.random()*(quotes.length));
-	// console.log(randomInt);
-	// console.log(quotes[randomInt].quote);
-	// console.log(quotes[randomInt].author);
-	// $("#randQuote").html(quotes[randomInt].quote);
-	// $("#quoteAttr").html(quotes[randomInt].author);
-	// dynamically display questions and answer choices
-
+		}, 1000*5); // changes quote every 5 seconds
 });
