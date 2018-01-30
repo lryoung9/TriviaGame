@@ -1,29 +1,5 @@
-// You'll create a trivia form with multiple choice or true/false options (your choice).
-
-// The player will have a limited amount of time to finish the quiz. 
-
-// The game ends when the time runs out. The page will reveal the number of questions that players answer correctly and incorrectly.
-
-// Don't let the player pick more than one answer per question.
-// Don't forget to include a countdown timer.
-
 // Variables:
 // Object with questons and answers
-var quotes = [
-	{quote: '"He was a wise man who invented beer."', author: 'Plato'},
-	{quote: '"Beer, if drunk in moderation, softens the temper, cheers the spirit and promotes health."', author: 'Thomas Jefferson'},
-	{quote: '"In a study, scientists report that drinking beer can be good for the liver. I’m sorry, did I say ‘scientists’? I meant Irish people."', author: 'Tina Fey'},
-	{quote: '"Instead of water we got here a draught of beer…a lumberer’s drink, which would acclimate and naturalize a man at once—which would make him see green, and, if he slept, dream that he heard the wind sough among the pines."', author: 'Henry David Thoreau'},
-	{quote: '"Beer, it’s the best damn drink in the world."', author: 'Jack Nicholson'},
-	{quote: '"Isn’t beer the holy libation of sincerity? The potion that dispels all hypocrisy, any charade of fine manners? The drink that does nothing worse than incite its fans to urinate in all innocence, to gain weight in all frankness?"', author: 'Milan Kundera'},
-	{quote: '"Beer’s intellectual. What a shame so many idiots drink it."', author: 'Ray Bradbury'},
-	{quote: '"Whoever drinks beer, he is quick to sleep; whoever sleeps long, does not sin; whoever does not sin, enters Heaven! Thus, let us drink beer!"', author: 'Martin Luther'},
-	{quote: '"Without question, the greatest invention in the history of mankind is beer. Oh, I grant you that the wheel was also a fine invention, but the wheel does not go nearly as well with pizza."', author: 'Dave Barry'},
-	{quote: '"There is an ancient Celtic axiom that says ‘Good people drink good beer.’ Which is true, then as now. Just look around you in any public barroom and you will quickly see: Bad people drink bad beer. Think about it."', author: 'Hunter S. Thompson'},
-	{quote: '"Give me a woman who loves beer and I will conquer the world."', author: 'Kaiser Wilhelm'},
-	{quote: '"Beer is proof that God loves us and wants us to be happy."', author: 'Benjamin Franklin'},
-];
-
 var trivia = [
 	{question: "A person who collects beer bottles is known as what?", options: ["oenophilist", "brewskiphilist", "labeorphilist", "contophilist"], correctAnswer: "labeorphilist", funFact: "Collecting beer mats is called Tegestology and the fear of an empty glass is Cenosillicaphobia ."},
 	{question: "All vitamins and minerals necessary for good health are in beer and other alcoholic beverages.", options: ["true", "false"], correctAnswer: "true", funFact: "Research suggests it can help protect against Alzheimer’s disease, aid weight loss and even balance hormones. Beer is high in vitamins AND low in sugar content. Beer contains all of the essential – and many of the non-essential – amino acids. As well as these protein-building blocks and minerals including phosphorus, iodine, magnesium and potassium, beer is rich in calcium so could benefit your bones."},
@@ -47,8 +23,10 @@ var timerId;
 // Functions: 
 // score keeping
 function scoreKeeping() {
+	// take user's answer and store in Variables
+
 	// compare array of user selected answers against the correct answers
-	for (var i = 0; i < (trivia.length); i++) {
+	for (var i = 0; i < trivia.length; i++) {
 		// Check if user even answered
 		if (typeof userAnswer[i] === "undefined") {
 			// add 1 to unanswered questions if user did not provide a choice of answer
@@ -65,32 +43,24 @@ function scoreKeeping() {
 }
 // end of game
 function endOfGame() {
+	window.location.replace("endGame.html")
 	// snarky comment on perfomance
-	var result = $("<p>");
 	if (numCorrect < (numIncorrect + numCorrect)) {
-		result.text("Are you drunk already? You played horribly!");
+		$("#result").text("Are you drunk already? You played horribly!");
 	} else {
-		result.text("Well played! You might be a professional alcoholic.")
+		$("#result").text("Well played! You might be a professional alcoholic.")
 	}
 	// reveal # of correct answers
-	$("#correct").html("Correct Answers: " + numCorrect)
+	$("#correct").html("<h2>Correct Answers: " + numCorrect + "</h2>")
 	// reveal # incorrect answers
-	$("#incorrect").html("Incorrect Answesr: " + numIncorrect)
+	$("#incorrect").html("<h2>Incorrect Answesr: " + numIncorrect + "</h2>")
 	// revial # unanswered questions
-	$("#unanswered").html("Unaswered: " + numUnanswered)
+	$("#unanswered").html("<h2>Unaswered: " + numUnanswered + "</h2>")
 }
-// timer
 
 $( document ).ready(function() {
-	// display a random quote on starting page
-	var randomInt= Math.floor(Math.random()*(quotes.length));
-	console.log(randomInt);
-	console.log(quotes[randomInt].quote);
-	console.log(quotes[randomInt].author);
-	$("#randQuote").html(quotes[randomInt].quote);
-	$("#quoteAttr").html(quotes[randomInt].author);
-	// dynamically display questions and answer choices
-	for (var i = 0; i < trivia.length; i++) {
+	// Start button reveals trivia questions
+		for (var i = 0; i < trivia.length; i++) {
 		var dispQuestion = $("<p>");
 		dispQuestion.addClass("questions");
 		dispQuestion.text(trivia[i].question);
@@ -101,29 +71,29 @@ $( document ).ready(function() {
 			$(".trivia-wrap").append(dispOptions);
 		}
 	}
-
-	// Click events:
-	// Start button reveals trivia questions and starts timer countdown
+	// start timer countdown
 	timerId = setInterval(function(){
 		console.log(counter);
 		counter--
 		$("#time").html("Time left: " + counter + " seconds")
+		// when time runs out
 		if (counter === 0) {
+			// stop timer
 			clearInterval(timerId);
-		}
-	}, 1000);
-		// while there is still time
-			// take user's answer and store in Variables
-			// only allow user to choose one answer per question
-			// Done button
-				// run score keeping
-				scoreKeeping();
-				// run end of game
-				endOfGame();
-		// if time runs,
 			// run score keeping
 			scoreKeeping();
 			// run end of game
 			endOfGame();
-});
+			}
+		}, 1000);		
+	})
 
+
+	// if user hits done button
+	$("#end").click(function() {
+		// run score keeping
+		scoreKeeping();
+		// run end of game
+		endOfGame();
+	});
+});
