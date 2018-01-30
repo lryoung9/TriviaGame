@@ -65,7 +65,7 @@ function endOfGame() {
 	// reveal # of correct answers
 	$("#correct").html("<h2>Correct Answers: " + numCorrect + "</h2>")
 	// reveal # incorrect answers
-	$("#incorrect").html("<h2>Incorrect Answesr: " + numIncorrect + "</h2>")
+	$("#incorrect").html("<h2>Incorrect Answers: " + numIncorrect + "</h2>")
 	// revial # unanswered questions
 	$("#unanswered").html("<h2>Unaswered: " + numUnanswered + "</h2>")
 }
