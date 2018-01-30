@@ -27,9 +27,9 @@ var quotes = [
 var trivia = [
 	{question: "A person who collects beer bottles is known as what?", options: ["oenophilist", "brewskiphilist", "labeorphilist", "contophilist"], correctAnswer: "labeorphilist", funFact: "Collecting beer mats is called Tegestology and the fear of an empty glass is Cenosillicaphobia ."},
 	{question: "All vitamins and minerals necessary for good health are in beer and other alcoholic beverages.", options: ["true", "false"], correctAnswer: "true", funFact: "Research suggests it can help protect against Alzheimer’s disease, aid weight loss and even balance hormones. Beer is high in vitamins AND low in sugar content. Beer contains all of the essential – and many of the non-essential – amino acids. As well as these protein-building blocks and minerals including phosphorus, iodine, magnesium and potassium, beer is rich in calcium so could benefit your bones."},
-	{question: "What ingredient is <strong>NOT</strong> required for a beverage to be considered a beer?", options: ["water", "barley", "hops", "yeast"], correctAnswer: "barley", funFact: "Despite Bavarian Duke Wilhelm IV's decree in 1516 that the only legal ingredients for brewing beer were barley malt, hops and water, beer can be made with any cereal grain - not just barley. Early recipes for beer sometimes included mushrooms, poppy seeds, butter, bay leaves, sugar, aromatics, honey, and bread crumbs."},
+	{question: "What ingredient is NOT required for a beverage to be considered a beer?", options: ["water", "barley", "hops", "yeast"], correctAnswer: "barley", funFact: "Despite Bavarian Duke Wilhelm IV's decree in 1516 that the only legal ingredients for brewing beer were barley malt, hops and water, beer can be made with any cereal grain - not just barley. Early recipes for beer sometimes included mushrooms, poppy seeds, butter, bay leaves, sugar, aromatics, honey, and bread crumbs."},
 	{question: "The oldest know written recipe is a recipe for beer.", options: ["true", "false"], correctAnswer: "true", funFact: "The Sumerians of ancient Mesopotamia wrote a recipe for beer around 4,000 years ago! The Babylonians are known to have made at least sixteen different kinds of beer and used a variety of grains."},
-	{question: "Quite a few celebrities resorted to bar tending to pay the bills before their careers took off. Which of the following has <strong>NOT</strong> been a bartender?", options: ["Ellen DeGeneres", "Sandra Bullock", "Bruce Willis", "Bradley Cooper"], correctAnswer: "Bradley Cooper", funFact: "Conditioning your hair with beer has none benefits of cleansing, strengthening and adding a healthy shine. Catherine Zeta-Jones has been a long time fan of this sort of shower beer."},
+	{question: "Quite a few celebrities resorted to bar tending to pay the bills before their careers took off. Which of the following has NOT been a bartender?", options: ["Ellen DeGeneres", "Sandra Bullock", "Bruce Willis", "Bradley Cooper"], correctAnswer: "Bradley Cooper", funFact: "Conditioning your hair with beer has none benefits of cleansing, strengthening and adding a healthy shine. Catherine Zeta-Jones has been a long time fan of this sort of shower beer."},
 ];
 // User's answer to a question
 var userAnswer = [];
@@ -85,6 +85,20 @@ $( document ).ready(function() {
 	console.log(quotes[randomInt].author);
 	$("#randQuote").html(quotes[randomInt].quote);
 	$("#quoteAttr").html(quotes[randomInt].author);
+	// dynamically display questions and answer choices
+	for (var i = 0; i < trivia.length; i++) {
+		var dispQuestion = $("<p>");
+		dispQuestion.addClass("questions");
+		dispQuestion.text(trivia[i].question);
+		$(".trivia-wrap").append(dispQuestion);
+		for (var j = 0; j < trivia[i].options.length; j++) {
+			var dispOptions = $('<label class="radio-inline"><input type="radio">' + trivia[i].options[j] + '</label>');
+			dispOptions.addClass("answers");
+			$(".trivia-wrap").append(dispOptions);
+		}
+	}
+
+	$("#questions").html()
 	// Click events:
 	// Start button reveals trivia questions and starts timer countdown
 	$( "#clickStart" ).click(function() {
